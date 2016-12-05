@@ -28,6 +28,8 @@ namespace AffiliateWindow
 
             getMerchant merchant = new getMerchant();
 
+            
+
             merchant.iMerchantId[0] = 2518;
             merchant.iMerchantId[1] = 3030;
             merchant.iMerchantId[2] = 686;
@@ -35,11 +37,6 @@ namespace AffiliateWindow
             merchant.iMerchantId[4] = 2518;
 
             merchant.sColumnToReturn[0] = "Product";
-
-
-
-
-
 
             client.getMerchant(userAuthentication, merchant);
 

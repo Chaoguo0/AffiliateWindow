@@ -2362,13 +2362,13 @@ namespace AffiliateWindow.Awin {
     public partial class getMerchant : object, System.ComponentModel.INotifyPropertyChanged {
 
 
-        private int[] iMerchantIdField = new int[5];
+        private int[] iMerchantIdField;
         
         private int iAdultField;
         
         private bool iAdultFieldSpecified;
-        
-        private string[] sColumnToReturnField = new string[1];
+
+        private string[] sColumnToReturnField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("iMerchantId", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
