@@ -2360,14 +2360,13 @@ namespace AffiliateWindow.Awin {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType=true, Namespace="http://v3.core.com.productserve.com/")]
     public partial class getMerchant : object, System.ComponentModel.INotifyPropertyChanged {
-
-
+        
         private int[] iMerchantIdField;
         
         private int iAdultField;
         
         private bool iAdultFieldSpecified;
-
+        
         private string[] sColumnToReturnField;
         
         /// <remarks/>
@@ -2381,7 +2380,6 @@ namespace AffiliateWindow.Awin {
                 this.RaisePropertyChanged("iMerchantId");
             }
         }
-        
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]

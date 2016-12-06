@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="cd84b620-7629-4d88-964d-abc400f13a26" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="deffa6b8-0808-42fd-9829-98ebac20cca0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="http://v3.core.com.productserve.com/ProductServeService.wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ProductServeService.wsdl" MetadataType="Wsdl" ID="b0e8b867-624a-4f6c-8a21-38d5d7970574" SourceId="1" SourceUrl="http://v3.core.com.productserve.com/ProductServeService.wsdl" />
+    <MetadataFile FileName="ProductServeService.wsdl" MetadataType="Wsdl" ID="4bcb5799-3d38-47aa-8888-38d6d7a3e182" SourceId="1" SourceUrl="http://v3.core.com.productserve.com/ProductServeService.wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
