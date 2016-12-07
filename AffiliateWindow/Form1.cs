@@ -13,23 +13,29 @@ namespace AffiliateWindow
 {
     public partial class Form1 : Form
     {
+        Awin.ApiPortTypeClient client;
+        UserAuthentication userAuthentication;
+
         public Form1()
         {
             InitializeComponent();
+
+            client = new Awin.ApiPortTypeClient();
+            userAuthentication = new UserAuthentication();
+            userAuthentication.sApiKey = "b9e01904105aac94b7ded008abcef422";
         }
 
-        Awin.ApiPortTypeClient client = new Awin.ApiPortTypeClient();
-        UserAuthentication userAuthentication = new UserAuthentication();
-        userAuthentication.sApiKey = "b9e01904105aac94b7ded008abcef422";
+
 
 
 
         private void btnShowResult_Click(object sender, EventArgs e)
         {
+            /*
             Awin.ApiPortTypeClient client = new Awin.ApiPortTypeClient();
             UserAuthentication userAuthentication = new UserAuthentication();
             userAuthentication.sApiKey = "b9e01904105aac94b7ded008abcef422";
-
+            */
             getMerchant merchant = new getMerchant();
 
             // comment out following lines to get all merchants …
