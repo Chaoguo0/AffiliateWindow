@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:api="http://v3.core.com.productserve.com/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://v3.core.com.productserve.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://v3.core.com.productserve.com/">
+      <xsd:element name="UserAuthentication">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="sToken" type="xsd:string" />
+            <xsd:element name="sApiKey" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCategory">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Category">
+        <xsd:sequence>
+          <xsd:element name="iId" type="xsd:long" />
+          <xsd:element name="sName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="iParentId" type="xsd:int" />
+          <xsd:element minOccurs="0" name="sDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          <xsd:element minOccurs="0" name="oCategoryTree" type="api:CategoryTree" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getCategoryResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oCategory" type="api:Category" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCategoryTree">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="bExpandAllBranches" type="xsd:boolean" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="CategoryTree">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="oCategory" type="api:Category" />
+          <xsd:element minOccurs="0" name="iActiveNode" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getCategoryTreeResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="oCategoryTree" type="api:CategoryTree" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCategoryPath">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getCategoryPathResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oCategory" type="api:Category" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDescendantCategoryIds">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDescendantCategoryIdsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iDescendantCategoryId" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProduct">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iProductId" type="xsd:long" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Product">
+        <xsd:sequence>
+          <xsd:element name="iId" type="xsd:long" />
+          <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+          <xsd:element name="iMerchantId" type="xsd:int" />
+          <xsd:element minOccurs="0" name="sMerchantProductId" type="xsd:string" />
+          <xsd:element name="iAdult" type="xsd:int" />
+          <xsd:element minOccurs="0" name="bHotPick" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="iUpc" type="xsd:int" />
+          <xsd:element minOccurs="0" name="iEan" type="xsd:long" />
+          <xsd:element minOccurs="0" name="sMpn" type="xsd:string" />
+          <xsd:element minOccurs="0" name="iIsbn" type="xsd:long" />
+          <xsd:element name="sName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sSpecification" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sPromotion" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sBrand" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sModel" type="xsd:string" />
+          <xsd:element name="sAwDeepLink" type="xsd:string" />
+          <xsd:element name="sAwThumbUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sAwImageUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sMerchantThumbUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sMerchantImageUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sDeliveryTime" type="xsd:string" />
+          <xsd:element name="fPrice" type="xsd:float" />
+          <xsd:element minOccurs="0" name="sCurrency" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fStorePrice" type="xsd:float" />
+          <xsd:element minOccurs="0" name="fRrpPrice" type="xsd:float" />
+          <xsd:element minOccurs="0" name="fDeliveryCost" type="xsd:float" />
+          <xsd:element minOccurs="0" name="bWebOffer" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="bPreOrder" type="xsd:boolean" />
+          <xsd:element minOccurs="0" name="sWarranty" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fPoints" type="xsd:float" />
+          <xsd:element minOccurs="0" name="sCommissionGroup" type="xsd:string" />
+          <xsd:element minOccurs="0" name="fCommissionAmount" type="xsd:float" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getProductResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oProduct" type="api:Product" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMerchantProduct">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="iMerchantId" type="xsd:int" />
+            <xsd:element name="sMerchantProductId" type="xsd:string" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMerchantProductResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oProduct" type="api:Product" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRelatedProducts">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iProductId" type="xsd:long" />
+            <xsd:element minOccurs="0" name="iBrandId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iLimit" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iScale" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getRelatedProductsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oProduct" type="api:Product" />
+            <xsd:element minOccurs="0" name="iTotalCount" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getProductList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="sQuery" type="xsd:string" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" name="bHotPick" type="xsd:boolean" />
+            <xsd:element minOccurs="0" name="bIncludeTree" type="xsd:boolean" />
+            <xsd:element minOccurs="0" name="sSort" type="api:ProductListSortOption" />
+            <xsd:element minOccurs="0" name="iOffset" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iLimit" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oActiveRefineByGroup" type="api:RefineByGroup" />
+            <xsd:element minOccurs="0" name="iLimitRefineBy" type="xsd:int" />
+            <xsd:element minOccurs="0" name="sMode" type="api:SearchProductModeOption" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iEnabledRefineBy" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:simpleType name="SearchProductModeOption">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="phrase" />
+          <xsd:enumeration value="boolean" />
+          <xsd:enumeration value="all" />
+          <xsd:enumeration value="any" />
+          <xsd:enumeration value="extended" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ProductListSortOption">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="az" />
+          <xsd:enumeration value="za" />
+          <xsd:enumeration value="hi" />
+          <xsd:enumeration value="lo" />
+          <xsd:enumeration value="points_asc" />
+          <xsd:enumeration value="points_desc" />
+          <xsd:enumeration value="popularity" />
+          <xsd:enumeration value="relevancy" />
+          <xsd:enumeration value="random" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="getProductListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oProduct" type="api:Product" />
+            <xsd:element minOccurs="0" name="iTotalCount" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oActiveRefineByGroup" type="api:RefineByGroup" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oRefineByGroup" type="api:RefineByGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="RefineByGroup">
+        <xsd:sequence>
+          <xsd:element name="iId" type="xsd:int" />
+          <xsd:element name="sName" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="oRefineByDefinition" type="api:RefineByDefinition" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="RefineByDefinition">
+        <xsd:sequence>
+          <xsd:element name="sId" type="xsd:string" />
+          <xsd:element name="sName" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getMerchant">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iMerchantId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Merchant">
+        <xsd:sequence>
+          <xsd:element name="iId" type="xsd:int" />
+          <xsd:element name="sName" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sCountryCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sStrapline" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sLogoUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sDisplayUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sClickThroughUrl" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="oDiscountCode" type="api:DiscountCode" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="oCommissionRange" type="api:CommissionRange" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CommissionRange">
+        <xsd:sequence>
+          <xsd:element name="sType" type="api:CommissionType" />
+          <xsd:element name="fMin" type="xsd:float" />
+          <xsd:element name="fMax" type="xsd:float" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="CommissionType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="percentage" />
+          <xsd:enumeration value="amount" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="getMerchantResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oMerchant" type="api:Merchant" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getDiscountCodes">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iMerchantId" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="iCategoryId" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="DiscountCode">
+        <xsd:sequence>
+          <xsd:element name="iMerchantId" type="xsd:int" />
+          <xsd:element name="sCode" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sDescription" type="xsd:string" />
+          <xsd:element minOccurs="0" name="sUrl" type="xsd:string" />
+          <xsd:element name="sStartDate" type="xsd:string" />
+          <xsd:element name="sEndDate" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getDiscountCodesResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oDiscountCode" type="api:DiscountCode" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMerchantList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iMaxResult" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getMerchantListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oMerchant" type="api:Merchant" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getQueryList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+            <xsd:element minOccurs="0" name="bUseGlobalList" type="xsd:boolean" />
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iLimit" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:complexType name="Query">
+        <xsd:sequence>
+          <xsd:element name="sQuery" type="xsd:string" />
+          <xsd:element minOccurs="0" name="iCategoryId" type="xsd:int" />
+          <xsd:element name="iCount" type="xsd:int" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="getQueryListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oQuery" type="api:Query" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGiftFinderProductList">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+            <xsd:element minOccurs="0" name="sSort" type="api:ProductListSortOption" />
+            <xsd:element minOccurs="0" name="iOffset" type="xsd:int" />
+            <xsd:element minOccurs="0" name="iLimit" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oActiveRefineByGroup" type="api:RefineByGroup" />
+            <xsd:element minOccurs="0" name="sMode" type="api:SearchProductModeOption" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="sColumnToReturn" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGiftFinderProductListResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oProduct" type="api:Product" />
+            <xsd:element minOccurs="0" name="iTotalCount" type="xsd:int" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oActiveRefineByGroup" type="api:RefineByGroup" />
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oRefineByGroup" type="api:RefineByGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGiftFinderOptions">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" name="iAdult" type="xsd:int" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getGiftFinderOptionsResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element minOccurs="0" maxOccurs="unbounded" name="oRefineByGroup" type="api:RefineByGroup" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ApiExceptionFault">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="message" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="UserAuthentication">
+    <wsdl:part name="request_header" element="api:UserAuthentication" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryRequest">
+    <wsdl:part name="parameters" element="api:getCategory" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryTreeRequest">
+    <wsdl:part name="parameters" element="api:getCategoryTree" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryPathRequest">
+    <wsdl:part name="parameters" element="api:getCategoryPath" />
+  </wsdl:message>
+  <wsdl:message name="getDescendantCategoryIdsRequest">
+    <wsdl:part name="parameters" element="api:getDescendantCategoryIds" />
+  </wsdl:message>
+  <wsdl:message name="getProductRequest">
+    <wsdl:part name="parameters" element="api:getProduct" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantProductRequest">
+    <wsdl:part name="parameters" element="api:getMerchantProduct" />
+  </wsdl:message>
+  <wsdl:message name="getProductListRequest">
+    <wsdl:part name="parameters" element="api:getProductList" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantRequest">
+    <wsdl:part name="parameters" element="api:getMerchant" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantListRequest">
+    <wsdl:part name="parameters" element="api:getMerchantList" />
+  </wsdl:message>
+  <wsdl:message name="getQueryListRequest">
+    <wsdl:part name="parameters" element="api:getQueryList" />
+  </wsdl:message>
+  <wsdl:message name="getRelatedProductsRequest">
+    <wsdl:part name="parameters" element="api:getRelatedProducts" />
+  </wsdl:message>
+  <wsdl:message name="getDiscountCodesRequest">
+    <wsdl:part name="parameters" element="api:getDiscountCodes" />
+  </wsdl:message>
+  <wsdl:message name="getGiftFinderProductListRequest">
+    <wsdl:part name="parameters" element="api:getGiftFinderProductList" />
+  </wsdl:message>
+  <wsdl:message name="getGiftFinderOptionsRequest">
+    <wsdl:part name="parameters" element="api:getGiftFinderOptions" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryResponse">
+    <wsdl:part name="return" element="api:getCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryTreeResponse">
+    <wsdl:part name="return" element="api:getCategoryTreeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCategoryPathResponse">
+    <wsdl:part name="return" element="api:getCategoryPathResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDescendantCategoryIdsResponse">
+    <wsdl:part name="return" element="api:getDescendantCategoryIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProductResponse">
+    <wsdl:part name="return" element="api:getProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantProductResponse">
+    <wsdl:part name="return" element="api:getMerchantProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="getProductListResponse">
+    <wsdl:part name="return" element="api:getProductListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantResponse">
+    <wsdl:part name="return" element="api:getMerchantResponse" />
+  </wsdl:message>
+  <wsdl:message name="getMerchantListResponse">
+    <wsdl:part name="return" element="api:getMerchantListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getQueryListResponse">
+    <wsdl:part name="return" element="api:getQueryListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getRelatedProductsResponse">
+    <wsdl:part name="return" element="api:getRelatedProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getDiscountCodesResponse">
+    <wsdl:part name="return" element="api:getDiscountCodesResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGiftFinderProductListResponse">
+    <wsdl:part name="return" element="api:getGiftFinderProductListResponse" />
+  </wsdl:message>
+  <wsdl:message name="getGiftFinderOptionsResponse">
+    <wsdl:part name="return" element="api:getGiftFinderOptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ApiException">
+    <wsdl:part name="ApiException" element="api:ApiExceptionFault" />
+  </wsdl:message>
+  <wsdl:portType name="ApiPortType">
+    <wsdl:operation name="getCategory">
+      <wsdl:input message="api:getCategoryRequest" />
+      <wsdl:output message="api:getCategoryResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCategoryTree">
+      <wsdl:input message="api:getCategoryTreeRequest" />
+      <wsdl:output message="api:getCategoryTreeResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getCategoryPath">
+      <wsdl:input message="api:getCategoryPathRequest" />
+      <wsdl:output message="api:getCategoryPathResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDescendantCategoryIds">
+      <wsdl:input message="api:getDescendantCategoryIdsRequest" />
+      <wsdl:output message="api:getDescendantCategoryIdsResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getProduct">
+      <wsdl:input message="api:getProductRequest" />
+      <wsdl:output message="api:getProductResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantProduct">
+      <wsdl:input message="api:getMerchantProductRequest" />
+      <wsdl:output message="api:getMerchantProductResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getProductList">
+      <wsdl:input message="api:getProductListRequest" />
+      <wsdl:output message="api:getProductListResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMerchant">
+      <wsdl:input message="api:getMerchantRequest" />
+      <wsdl:output message="api:getMerchantResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantList">
+      <wsdl:input message="api:getMerchantListRequest" />
+      <wsdl:output message="api:getMerchantListResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getQueryList">
+      <wsdl:input message="api:getQueryListRequest" />
+      <wsdl:output message="api:getQueryListResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getRelatedProducts">
+      <wsdl:input message="api:getRelatedProductsRequest" />
+      <wsdl:output message="api:getRelatedProductsResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getDiscountCodes">
+      <wsdl:input message="api:getDiscountCodesRequest" />
+      <wsdl:output message="api:getDiscountCodesResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getGiftFinderProductList">
+      <wsdl:input message="api:getGiftFinderProductListRequest" />
+      <wsdl:output message="api:getGiftFinderProductListResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+    <wsdl:operation name="getGiftFinderOptions">
+      <wsdl:input message="api:getGiftFinderOptionsRequest" />
+      <wsdl:output message="api:getGiftFinderOptionsResponse" />
+      <wsdl:fault name="ApiException" message="api:ApiException" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ApiBinding" type="api:ApiPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getCategory">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCategoryTree">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getCategoryPath">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDescendantCategoryIds">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProduct">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantProduct">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProductList">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMerchant">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMerchantList">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getQueryList">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRelatedProducts">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDiscountCodes">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getGiftFinderProductList">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getGiftFinderOptions">
+      <soap:operation soapAction="" />
+      <wsdl:input>
+        <soap:header message="api:UserAuthentication" part="request_header" use="literal" />
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ApiException">
+        <soap:fault use="literal" name="ApiException" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ApiService">
+    <wsdl:port name="ApiPort" binding="api:ApiBinding">
+      <soap:address location="http://v3.core.com.productserve.com/ProductServeService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
