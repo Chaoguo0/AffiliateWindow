@@ -14,8 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-using AffiliateWindow.Awin;
-
+using AffiliateWindowWPF.Awin;
+using System.Collections.ObjectModel;
 
 namespace AffiliateWindowWPF
 {
@@ -58,6 +58,12 @@ namespace AffiliateWindowWPF
                 RaisePropertyChanged("Name");
             }
         }
+
+        public ObservableProduct(long id, string name)
+        {
+            _id = id.ToString();
+            _name = name;
+        }
     }
 
     public class ObservableMerchant : ObservableItem
@@ -89,6 +95,12 @@ namespace AffiliateWindowWPF
                 RaisePropertyChanged("Name");
             }
         }
+
+        public ObservableMerchant(int id, string name)
+        {
+            _id = id.ToString();
+            _name = name;
+        }
     }
 
     /// <summary>
@@ -96,22 +108,39 @@ namespace AffiliateWindowWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<ObservableMerchant> _merchants;
-        private List<ObservableProduct> _products;
+        private ObservableCollection<ObservableMerchant> _merchants;
+        private ObservableCollection<ObservableProduct> _products;
+
+        Awin.ApiPortTypeClient client;
+        UserAuthentication userAuthentication;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            _merchants = new List<ObservableMerchant>();
-            _products = new List<ObservableProduct>();
+            _merchants = new ObservableCollection<ObservableMerchant>();
+            _products = new ObservableCollection<ObservableProduct>();
 
-            ProductsDataGrid.ItemsSource = _merchants;
-            MerchantsDataGrid.ItemsSource = _products;
+            ProductsDataGrid.ItemsSource = _products;
+            MerchantsDataGrid.ItemsSource = _merchants;
+
+            client = new Awin.ApiPortTypeClient();
+            userAuthentication = new UserAuthentication();
+            userAuthentication.sApiKey = "b9e01904105aac94b7ded008abcef422";
         }
 
         private void ShowMerchantsClick(object sender, RoutedEventArgs e)
         {
+            getMerchant merchant = new getMerchant();
+
+            Merchant[] result = client.getMerchant(userAuthentication, merchant);
+
+            _merchants.Clear();
+
+            foreach (var item in result)
+            {
+                _merchants.Add(new ObservableMerchant(item.iId, item.sName));
+            }
 
         }
 
@@ -123,11 +152,12 @@ namespace AffiliateWindowWPF
             product.iProductId[0] = 1122223;
 
             Product[] result = client.getProduct(userAuthentication, product);
-            lblProducts.Text = "Products (id, name):\n";
+
+            _products.Clear();
 
             foreach (var item in result)
             {
-                lblProducts.Text += item.iId.ToString() + ", " + item.sName + "\n";
+                _products.Add(new ObservableProduct(item.iId, item.sName));
             }
 
         }
